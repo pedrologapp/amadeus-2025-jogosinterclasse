@@ -29,7 +29,8 @@ import {
   UserPlus,
   Utensils,
   XCircle,      // <- Adicione este
-  AlertTriangle
+  AlertTriangle,
+  ClipboardCheck
 } from 'lucide-react';
 // Importando as imagens
 import interiorImage1 from './assets/happy1.jpg';
@@ -296,10 +297,10 @@ function App() {
       <section className="hero-section min-h-screen flex items-center justify-center text-white relative">
         <div className="text-center z-10 max-w-4xl mx-auto px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Veneza Water Park
+            Jogos Interclasses Amadeus 2025
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Em comemoração ao Dia da Criança, realizaremos um passeio especial para o Veneza Park Aquático!
+            Começa os nossos jogos interclasses, que vença a melhor turma!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -314,65 +315,23 @@ function App() {
           <div className="mt-12 flex justify-center items-center space-x-8 text-sm">
             <div className="flex items-center">
               <Calendar className="h-5 w-5 mr-2" />
-              18 de Outubro de 2025 - dia todo.
+              31 de Outubro de 2025 - pela manhça.
             </div>
             <div className="flex items-center">
               <MapPin className="h-5 w-5 mr-2" />
-              Veneza Water Park, Pernambuco.
+              Ginásio do Amarante
             </div>
           </div>
         </div>
       </section>
-
-      {/* Sobre o Passeio */}
-      <section id="sobre" className="section-padding bg-white">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 gradient-text">Sobre o Evento</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-             o Veneza Water Park é o maior parque aquático de Pernambuco. Com 90 mil metros quadrados de área, um complexo gastronômico para todos os gostos e mais de trinta atrações entre radicais e relaxantes, o parque compõe o equipamento turístico mais importante do estado.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Uma Experiência Única</h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <p>Espaço com segurança e comodidade</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <p>praça de alimentação com oito lanchonetes</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <p>Posto médico que conta com médico, paramédico, enfermeira e ambulância de plantão</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <p>Diversão, segurança e tranquilidade</p>
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <img src={interiorImage1} alt="Interior do Instituto" className="rounded-lg shadow-lg h-48 w-full object-cover" />
-              <img src={interiorImage2} alt="Coleções do Instituto" className="rounded-lg shadow-lg h-48 w-full object-cover" />
-              <img src={jardimImage} alt="Jardins do Instituto" className="rounded-lg shadow-lg col-span-2 h-64 w-full object-cover" />
-            </div>
-          </div>
-        </div>
-      </section>
-
       
     {/* Itinerário */}
       <section id="itinerario" className="section-padding bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Sobre o passeio</h2>
+            <h2 className="text-4xl font-bold mb-4">Sobre os Jogos Inteclasses</h2>
             <p className="text-lg text-muted-foreground">
-              Confira as informações do nosso passeio
+              Confira as informações
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -386,10 +345,10 @@ function App() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-center">
-                  Saída: 03h da manhã
+                  Dia 31 de Outubro de 2025
                 </p>
                 <p className="text-sm text-center">
-                  Retorno previsto: 23h do mesmo dia
+                  Horário: Das 7h às 11h
                 </p>
               </CardContent>
             </Card>
@@ -403,41 +362,37 @@ function App() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-center">
-                  Veneza Water Park - Avenida Dr. Claudio José Gueiros Leite, 10050, Maria Farinha, Paulista – PE
+                  Ginásio do Amarante
                 </p>
               </CardContent>
             </Card>
             <Card className="card-hover">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-3 bg-green-500/10 rounded-full w-fit">
-                  <Utensils className="h-8 w-8 text-green-500" />
+                  <ClipboardCheck className="h-8 w-8 text-blue-500" />
                 </div>
-                <CardTitle>Lanches Permitidos</CardTitle>
-                <CardDescription>Para entrada no parque</CardDescription>
+                <CardTitle> Modalidades</CardTitle>
+                <CardDescription>Modalidades permitidas</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="text-sm list-disc list-inside space-y-1 text-left">
-                  <li>Biscoitos, salgadinhos, sucos de caixinha e frutas</li>
-                  <li>Bolos (comemorativos ou em fatias)</li>
-                  <li>Água mineral em garrafas próprias</li>
-                  <li>Refrigerantes em lata</li>
-                  <li>Todos os itens devem ser transportados em bolsas ou bolsas térmicas</li>
+                  <li>Futsal (Masculino e Feminino)</li>
+                  <li>Voleibol (Masculino e Feminino)</li>
                 </ul>
               </CardContent>
             </Card>
             <Card className="card-hover">
               <CardHeader className="text-center">
-				<div className="mx-auto mb-4 p-3 bg-red-500/10 rounded-full w-fit">
- 					 <XCircle className="h-8 w-8 text-red-500" />
+				<div className="mx-auto mb-4 p-3 bg-green-500/10 rounded-full w-fit">
+ 					 <Circle className="h-8 w-8 text-red-500" />
 					</div>
-                <CardTitle>NÃO é Permitidos</CardTitle>
+                <CardTitle>Inscrições</CardTitle>
                 <CardDescription>Regras</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="text-sm list-disc list-inside space-y-1 text-left">
-                  <li>Não é permitido o manuseio de alimentos in natura</li>
-                  <li>Não serão aceitos: embalagens não industriais, recipientes ou embalagens de vidro, coolers, isopores, garrafas PET (exceto água), objetos cortantes ou perfurantes.</li>
-                </ul>
+                  <li>Os alunos interessados em participar devem se inscrever acessando esse formulário</li>
+                   </ul>
               </CardContent>
             </Card>
 			  
@@ -1076,6 +1031,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
