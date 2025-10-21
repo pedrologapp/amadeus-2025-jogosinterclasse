@@ -54,43 +54,6 @@ function App() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [inscriptionSuccess, setInscriptionSuccess] = useState(false);
   
-  // Estados para validação de CPF
-  const [cpfError, setCpfError] = useState('');
-  const [cpfValid, setCpfValid] = useState(false);
-
-  // Função para validar CPF
-  const validarCPF = (cpf) => {
-    cpf = cpf.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
-    
-    if (cpf.length !== 11) return false;
-    if (/^(\d)\1{10}$/.test(cpf)) return false; // CPF com todos dígitos iguais
-    
-    let soma = 0;
-    let resto;
-    
-    // Primeiro dígito verificador
-    for (let i = 1; i <= 9; i++) {
-      soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
-    }
-    resto = (soma * 10) % 11;
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.substring(9, 10))) return false;
-    
-    // Segundo dígito verificador
-    soma = 0;
-    for (let i = 1; i <= 10; i++) {
-      soma += parseInt(cpf.substring(i-1, i)) * (12 - i);
-    }
-    resto = (soma * 10) % 11;
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.substring(10, 11))) return false;
-    
-    return true;
-  };
-
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   // Função para mostrar formulário
   const showInscricaoForm = () => {
@@ -100,86 +63,6 @@ function App() {
     }, 100);
   };
 
-  // Cálculo de preço atualizado
-  const calculatePrice = () => {
-    const PRECO_BASE = 280.0;
-    
-    let valorTotal = PRECO_BASE;
-    
-    if (formData.paymentMethod === 'credit') {
-      let taxaPercentual = 0;
-      const taxaFixa = 0.49;
-      const parcelas = parseInt(formData.installments) || 1;
-      
-      if (parcelas === 1) {
-        taxaPercentual = 0.0299;
-      } else if (parcelas >= 2 && parcelas <= 4) {
-        taxaPercentual = 0.0349;
-      } else {
-        taxaPercentual = 0.0399;
-      }
-      
-      valorTotal = valorTotal + (valorTotal * taxaPercentual) + taxaFixa;
-    }
-    
-    const valorParcela = valorTotal / (parseInt(formData.installments) || 1);
-    return { valorTotal, valorParcela };
-  };
-
-  const { valorTotal, valorParcela } = calculatePrice();
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    
-    // Aplicar máscara de CPF
-    if (name === 'cpf') {
-      const cpfValue = value
-        .replace(/\D/g, '') // Remove tudo que não é dígito
-        .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona primeiro ponto
-        .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona segundo ponto
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona hífen
-
-      setFormData(prev => ({ ...prev, [name]: cpfValue }));
-      
-      // Validação em tempo real do CPF
-      const cpfSemMascara = cpfValue.replace(/[^\d]/g, '');
-      
-      if (cpfSemMascara.length === 0) {
-        setCpfError('');
-        setCpfValid(false);
-      } else if (cpfSemMascara.length < 11) {
-        setCpfError('CPF deve ter 11 dígitos');
-        setCpfValid(false);
-      } else if (cpfSemMascara.length === 11) {
-        if (validarCPF(cpfSemMascara)) {
-          setCpfError('');
-          setCpfValid(true);
-        } else {
-          setCpfError('CPF inválido. Verifique os números digitados.');
-          setCpfValid(false);
-        }
-      }
-    } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    }
-  };
-
-  // Função de validação antes do submit
-  const validateForm = () => {
-    const cpfSemMascara = formData.cpf.replace(/[^\d]/g, '');
-    
-    if (!cpfSemMascara || cpfSemMascara.length !== 11) {
-      alert('Por favor, preencha um CPF válido.');
-      return false;
-    }
-    
-    if (!validarCPF(cpfSemMascara)) {
-      alert('CPF inválido. Verifique os números digitados.');
-      return false;
-    }
-    
-    return true;
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -651,6 +534,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
