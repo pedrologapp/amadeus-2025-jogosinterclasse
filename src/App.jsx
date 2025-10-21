@@ -53,7 +53,82 @@ function App() {
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const [inscriptionSuccess, setInscriptionSuccess] = useState(false);
-  
+
+ // Estados para validação de CPF - REMOVA ESSAS LINHAS SE AINDA EXISTIREM
+              // const [cpfError, setCpfError] = useState('');
+              // const [cpfValid, setCpfValid] = useState(false);
+
+              // Função para scroll suave
+              const scrollToSection = (sectionId) => {
+                document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+              };
+
+              // Função para mostrar formulário
+              const showInscricaoForm = () => {
+                setShowForm(true);
+                setTimeout(() => {
+                  document.getElementById('formulario-inscricao')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              };
+
+              // Função para capturar mudanças no formulário
+              const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                setFormData(prev => ({ ...prev, [name]: value }));
+              };
+
+              // Função para enviar formulário
+              const handleSubmit = async (e) => {
+                e.preventDefault();
+                setIsProcessing(true);
+
+                try {  
+                  // Enviar dados para o webhook do n8n
+                  const response = await fetch('https://webhook.escolaamadeus.com/webhook/amadeuseventos', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      studentName: formData.studentName,
+                      studentGrade: formData.studentGrade,
+                      studentClass: formData.studentClass,
+                      timestamp: new Date().toISOString(),
+                      event: 'Amadeus-interclasse'
+                    })
+                  });
+
+                  if (response.ok) {
+                    const responseData = await response.json();
+                    console.log('Resposta do n8n:', responseData);
+                    
+                    if (responseData.success === false) {
+                      alert(responseData.message || 'Erro ao processar dados. Tente novamente.');
+                      return;
+                    }
+                    
+                    // Mostrar mensagem de sucesso
+                    alert('Inscrição realizada com sucesso!');
+                    
+                    // Limpar formulário
+                    setFormData({
+                      studentName: '',
+                      studentGrade: '',
+                      studentClass: ''
+                    });
+                    setShowForm(false);
+                    
+                  } else {
+                    const errorData = await response.json();
+                    alert(errorData.message || 'Erro ao enviar dados para o servidor');
+                  }
+                } catch (error) {
+                  console.error('Erro:', error);
+                  alert('Erro ao processar inscrição. Tente novamente.');
+                } finally {
+                  setIsProcessing(false);
+                }
+              };
 
   // Função para mostrar formulário
   const showInscricaoForm = () => {
@@ -131,31 +206,6 @@ function App() {
       setIsProcessing(false);
     }
   };
-
-  if (inscriptionSuccess) {
-    return (
-      <div className="min-h-screen bg-green-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <div className="mx-auto mb-4 p-3 bg-green-100 rounded-full w-fit">
-              <CheckCircle className="h-8 w-8 text-green-600" />
-            </div>
-            <CardTitle className="text-green-600">Aguarde!</CardTitle>
-            <CardDescription>Redirecionando para o pagamento...</CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <p className="text-sm text-muted-foreground mb-6">
-              Seus dados foram registrados com sucesso. Em instantes você será redirecionado para finalizar o pagamento.
-            </p>
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4"></div>
-            <Button onClick={() => window.location.reload()} variant="outline" className="w-full">
-              Voltar ao Início
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen smooth-scroll">
@@ -534,6 +584,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
