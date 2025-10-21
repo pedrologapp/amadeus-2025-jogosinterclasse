@@ -288,6 +288,14 @@ import React, { useState } from 'react';
                   </p>
                 </div>
               </div>    
+			 <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <p className="text-sm">
+                   Saída: Os alunos sairão: Sozinhos, mediante a apresentação da carteira de identificação. Ou com um responsável, caso não possuam a carteira de identificação.
+                  </p>
+                </div>
+              </div>  
               <div className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
                 <div>
@@ -495,6 +503,7 @@ import React, { useState } from 'react';
 }
 
 export default App;
+
 
 
 
