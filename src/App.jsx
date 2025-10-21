@@ -477,7 +477,7 @@ function App() {
                     className="bg-orange-600 hover:bg-orange-700 px-8 py-3"
                     onClick={showInscricaoForm}
                   >
-                    Realizar Inscrição e Pagamento
+                    Realizar Inscrição
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 ) : (
@@ -651,6 +651,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
