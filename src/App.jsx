@@ -495,8 +495,6 @@ function App() {
                   {!showForm ? 'Preencha seus dados e escolha a forma de pagamento' : 'Clique acima para fechar o formulário'}
                 </p>
               </div>
-            </CardContent>
-          </Card>
 
 			
 
@@ -902,6 +900,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
