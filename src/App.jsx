@@ -30,7 +30,9 @@ import {
   Utensils,
   XCircle,      // <- Adicione este
   AlertTriangle,
-  ClipboardCheck
+  ClipboardCheck,
+  FileText,  
+  Trophy
 } from 'lucide-react';
 // Importando as imagens
 import interiorImage1 from './assets/happy1.jpg';
@@ -384,7 +386,7 @@ function App() {
             <Card className="card-hover">
               <CardHeader className="text-center">
 				<div className="mx-auto mb-4 p-3 bg-green-500/10 rounded-full w-fit">
- 					 <Circle className="h-8 w-8 text-red-500" />
+ 					 <FileText className="h-8 w-8 text-blue-500" />
 					</div>
                 <CardTitle>Inscrições</CardTitle>
                 <CardDescription>Regras</CardDescription>
@@ -1031,6 +1033,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
