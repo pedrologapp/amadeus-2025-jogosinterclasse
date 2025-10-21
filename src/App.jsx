@@ -210,7 +210,7 @@ function App() {
           installments: formData.installments,
           amount: valorTotal,
           timestamp: new Date().toISOString(),
-          event: 'Amadeus-venezapark'
+          event: 'Amadeus-interclasse'
         })
       });
 
@@ -498,353 +498,104 @@ function App() {
 
 			
 
-          {/* FORMULÁRIO DE INSCRIÇÃO - SHOW/HIDE */}
-          {showForm && (
-            <Card id="formulario-inscricao" className="border-orange-200 bg-orange-50/30">
-              <CardHeader>
-                <CardTitle className="flex items-center text-orange-800">
-                  <User className="mr-2 h-5 w-5" />
-                  Formulário de Inscrição
-                </CardTitle>
-                <CardDescription>
-                  Preencha todos os dados para garantir sua participação
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  
-                  {/* Dados do Aluno */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4 flex items-center">
-                      <User className="mr-2 h-5 w-5" />
-                      Dados do Aluno
-                    </h3>
-                    <div className="space-y-4">
-                      <div>
-                        <Label htmlFor="studentName">Nome Completo do Aluno *</Label>
-                        <Input
-                          id="studentName"
-                          name="studentName"
-                          value={formData.studentName}
-                          onChange={handleInputChange}
-                          required
-                          placeholder="Nome completo do aluno"
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="studentGrade">Série do Aluno *</Label>
-                          <select
-                            id="studentGrade"
-                            name="studentGrade"
-                            value={formData.studentGrade}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
-                          >
-                            <option value="">Selecione a série</option>
-                           {/* 
-							<option value="Maternal II">Maternal II</option>
-                            <option value="Maternal III">Maternal III</option>
-                            <option value="Grupo 4">Grupo 4</option>
-                            <option value="Grupo 5">Grupo 5</option>
-                            <option value="1º Ano">1º Ano</option>
-                            <option value="2º Ano">2º Ano</option>
-                            <option value="3º Ano">3º Ano</option>
-							*/}
-							<option value="4º Ano">4º Ano</option>
-							<option value="5º Ano">5º Ano</option>
-							<option value="6º Ano">6º Ano</option>
-							<option value="7º Ano">7º Ano</option>
-							<option value="8º Ano">8º Ano</option>
-							<option value="9º Ano">9º Ano</option>
-                          </select>
-                        </div>
-                        {/* 
-                        <div>
-                          <Label htmlFor="studentClass">Turma do Aluno *</Label>
-                          <Input
-                            id="studentClass"
-                            name="studentClass"
-                            value={formData.studentClass}
-                            onChange={handleInputChange}
-                            required
-                            placeholder="Ex: A, B, C"
-                          />
-                        </div>
-                        Dados do Aluno */}
-                        <div>
-                          <Label htmlFor="studentClass">Turma do Aluno *</Label>
-                          <select
-                            id="studentClass"
-                            name="studentClass"
-                            value={formData.studentClass}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
-                          >
-                            <option value="">Selecione a turma</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                          </select>
-                        </div>                       
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Dados do Responsável */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4 flex items-center">
-                      <Mail className="mr-2 h-5 w-5" />
-                      Dados do Responsável
-                    </h3>
-                    <div className="space-y-4">
-                      <div>
-                        <Label htmlFor="parentName">Nome do Responsável *</Label>
-                        <Input
-                          id="parentName"
-                          name="parentName"
-                          value={formData.parentName}
-                          onChange={handleInputChange}
-                          required
-                          placeholder="Nome completo do responsável"
-                        />
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                          <Input
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            required
-                            placeholder="(84) 99999-9999"
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="email">E-mail *</Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            required
-                            placeholder="seu@email.com"
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="cpf">CPF do Responsável *</Label>
-                          <Input
-                            id="cpf"
-                            name="cpf"
-                            value={formData.cpf}
-                            onChange={handleInputChange}
-                            required
-                            placeholder="000.000.000-00"
-                            maxLength="14"
-                            className={`${
-                              formData.cpf && cpfError 
-                                ? 'border-red-500 bg-red-50' 
-                                : formData.cpf && cpfValid 
-                                ? 'border-green-500 bg-green-50' 
-                                : ''
-                            }`}
-                          />
-                          {cpfError && (
-                            <p className="text-red-500 text-sm mt-1 flex items-center">
-                              <span className="mr-1">⚠️</span>
-                              {cpfError}
-                            </p>
-                          )}
-                          {cpfValid && !cpfError && (
-                            <p className="text-green-600 text-sm mt-1 flex items-center">
-                              <span className="mr-1">✅</span>
-                              CPF válido
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Seção de Acompanhantes Adicionais 
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4 flex items-center">
-                      <UserPlus className="mr-2 h-5 w-5" />
-                      Acompanhantes Adicionais
-                    </h3>
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
-                      <p className="text-sm text-blue-800 mb-3">
-                        O pacote básico já inclui <strong>pai, mãe e filho</strong>. Você pode adicionar até 5 acompanhantes extras por apenas R$ 20,00 cada.
-                      </p>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <Label className="text-sm font-medium">Quantidade de acompanhantes adicionais:</Label>
-                          <div className="flex items-center space-x-2">
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                              onClick={decreaseCompanions}
-                              disabled={formData.additionalCompanions === 0}
-                            >
-                              <Minus className="h-4 w-4" />
-                            </Button>
-                            <span className="w-8 text-center font-semibold">
-                              {formData.additionalCompanions}
-                            </span>
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                              onClick={increaseCompanions}
-                              disabled={formData.additionalCompanions === 5}
-                            >
-                              <Plus className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                        
-                        {formData.additionalCompanions > 0 && (
-                          <div className="text-sm">
-                            <span className="text-green-600 font-medium">
-                              + R$ {(formData.additionalCompanions * 20).toFixed(2).replace('.', ',')}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                      
-                      {formData.additionalCompanions > 0 && (
-                        <div className="mt-3 text-xs text-blue-700">
-                          <strong>Total de pessoas no evento:</strong> {3 + formData.additionalCompanions} pessoas
-                          <br />
-                          <strong>Composição:</strong> Aluno + Pai + Mãe + {formData.additionalCompanions} acompanhante{formData.additionalCompanions > 1 ? 's' : ''} adicional{formData.additionalCompanions > 1 ? 'is' : ''}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  */}
-                  {/* Método de Pagamento */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">Método de Pagamento*</h3>
-                    
-                    <div className="space-y-3 mb-6">
-                      <div 
-                        className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                          formData.paymentMethod === 'pix' 
-                            ? 'border-orange-400 bg-orange-50' 
-                            : 'border-gray-200 hover:border-gray-300'
-                        }`}
-                        onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'pix', installments: 1 }))}
-                      >
-                        <div className="flex items-center">
-                          <div className={`w-4 h-4 rounded-full border-2 mr-3 ${
-                            formData.paymentMethod === 'pix' ? 'border-orange-400 bg-orange-400' : 'border-gray-300'
-                          }`}>
-                            {formData.paymentMethod === 'pix' && (
-                              <div className="w-full h-full rounded-full bg-orange-400"></div>
-                            )}
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="text-lg font-bold">PIX</span>
-                            <span className="text-sm">
-                              R$ {(280).toFixed(2).replace('.', ',')} (sem taxas)
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div 
-                        className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                          formData.paymentMethod === 'credit' 
-                            ? 'border-orange-400 bg-orange-50' 
-                            : 'border-gray-200 hover:border-gray-300'
-                        }`}
-                        onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'credit' }))}
-                      >
-                        <div className="flex items-center">
-                          <div className={`w-4 h-4 rounded-full border-2 mr-3 ${
-                            formData.paymentMethod === 'credit' ? 'border-orange-400 bg-orange-400' : 'border-gray-300'
-                          }`}>
-                            {formData.paymentMethod === 'credit' && (
-                              <div className="w-full h-full rounded-full bg-orange-400"></div>
-                            )}
-                          </div>
+              {/* FORMULÁRIO DE INSCRIÇÃO - SHOW/HIDE */}
+                  {showForm && (
+                    <Card id="formulario-inscricao" className="border-orange-200 bg-orange-50/30">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-orange-800">
+                          <User className="mr-2 h-5 w-5" />
+                          Formulário de Inscrição
+                        </CardTitle>
+                        <CardDescription>
+                          Preencha todos os dados para garantir sua participação
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                          
+                          {/* Dados do Aluno */}
                           <div>
-                            <div className="flex items-center space-x-2">
-                              <span className="text-sm">💳</span>
-                              <span className="text-sm font-medium">Cartão de Crédito</span>
-                            </div>
-                            <div className="text-xs text-gray-600 ml-6">                        
+                            <h3 className="text-lg font-semibold mb-4 flex items-center">
+                              <User className="mr-2 h-5 w-5" />
+                              Dados do Aluno
+                            </h3>
+                            <div className="space-y-4">
+                              <div>
+                                <Label htmlFor="studentName">Nome Completo do Aluno *</Label>
+                                <Input
+                                  id="studentName"
+                                  name="studentName"
+                                  value={formData.studentName}
+                                  onChange={handleInputChange}
+                                  required
+                                  placeholder="Nome completo do aluno"
+                                />
+                              </div>
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <Label htmlFor="studentGrade">Série do Aluno *</Label>
+                                  <select
+                                    id="studentGrade"
+                                    name="studentGrade"
+                                    value={formData.studentGrade}
+                                    onChange={handleInputChange}
+                                    required
+                                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                                  >
+                                    <option value="">Selecione a série</option>
+                                    <option value="4º Ano">4º Ano</option>
+                                    <option value="5º Ano">5º Ano</option>
+                                    <option value="6º Ano">6º Ano</option>
+                                    <option value="7º Ano">7º Ano</option>
+                                    <option value="8º Ano">8º Ano</option>
+                                    <option value="9º Ano">9º Ano</option>
+                                  </select>
+                                </div>
+                                <div>
+                                  <Label htmlFor="studentClass">Turma do Aluno *</Label>
+                                  <select
+                                    id="studentClass"
+                                    name="studentClass"
+                                    value={formData.studentClass}
+                                    onChange={handleInputChange}
+                                    required
+                                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                                  >
+                                    <option value="">Selecione a turma</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                  </select>
+                                </div>                       
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
 
-                    {formData.paymentMethod === 'credit' && (
-                      <div className="mb-6">
-                        <Label className="text-sm font-medium">Número de Parcelas</Label>
-                        <select
-                          value={formData.installments}
-                          onChange={(e) => setFormData(prev => ({ ...prev, installments: parseInt(e.target.value) }))}
-                          className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm mt-2"
-                        >
-                          <option value={1}>1x de R$ {(valorTotal / 1).toFixed(2).replace('.', ',')}</option>          
-                          <option value={2}>2x de R$ {(valorTotal / 2).toFixed(2).replace('.', ',')}</option>					        
-                          <option value={3}>3x de R$ {(valorTotal / 3).toFixed(2).replace('.', ',')}</option>						        
-                          <option value={4}>4x de R$ {(valorTotal / 4).toFixed(2).replace('.', ',')}</option>
-                        </select>
-                      </div>
-                    )}
+                          {/* Botão de Envio */}
+                          <Button 
+                            type="submit" 
+                            className="w-full bg-orange-600 hover:bg-orange-700 text-white py-6 text-lg font-bold"
+                            disabled={isProcessing}
+                          >
+                            {isProcessing ? (
+                              <>
+                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                                Processando Inscrição...
+                              </>
+                            ) : (
+                              'CONFIRMAR INSCRIÇÃO'
+                            )}
+                          </Button>
 
-                    {/* Valor Total */}
-                    <div className="bg-orange-100 p-4 rounded-lg border border-orange-200">
-                      <div className="text-center">
-                        <h4 className="text-lg font-bold text-orange-800 mb-1">Valor Total</h4>
-                        <div className="text-2xl font-bold text-orange-900">
-                          R$ {valorTotal.toFixed(2).replace('.', ',')}
-                        </div>
-                        {formData.paymentMethod === 'credit' && formData.installments > 1 && (
-                          <div className="text-sm text-orange-700 mt-1">
-                            {formData.installments}x de R$ {valorParcela.toFixed(2).replace('.', ',')}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Botão de Envio */}
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-orange-600 hover:bg-orange-700 text-white py-6 text-lg font-bold"
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        Processando Inscrição...
-                      </>
-                    ) : (
-                      'CONTINUAR PARA PAGAMENTO'
-                    )}
-                  </Button>
-
-                  <p className="text-xs text-center text-gray-600">
-                    Ao finalizar, você será redirecionado para o pagamento via Asaas
-                  </p>
-                </form>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-      </section>
+                          <p className="text-xs text-center text-gray-600">
+                            Sua inscrição será confirmada instantaneamente
+                          </p>
+                        </form>
+                      </CardContent>
+                    </Card>
+                  )}
+                </div>
+              </section>
 
       {/* Contato */}
       <section id="contato" className="section-padding bg-muted/30">
@@ -900,6 +651,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
