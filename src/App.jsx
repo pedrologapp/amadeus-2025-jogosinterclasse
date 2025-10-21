@@ -389,8 +389,6 @@ import React, { useState } from 'react';
                                     className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
                                   >
                                     <option value="">Selecione a série</option>
-                                    <option value="4º Ano">4º Ano</option>
-                                    <option value="5º Ano">5º Ano</option>
                                     <option value="6º Ano">6º Ano</option>
                                     <option value="7º Ano">7º Ano</option>
                                     <option value="8º Ano">8º Ano</option>
@@ -497,6 +495,7 @@ import React, { useState } from 'react';
 }
 
 export default App;
+
 
 
 
