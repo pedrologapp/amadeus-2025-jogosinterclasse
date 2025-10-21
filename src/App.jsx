@@ -1,262 +1,175 @@
 import React, { useState } from 'react';
-import './App.css';
-import { Button } from './components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
-import { Badge } from './components/ui/badge';
-import { Separator } from './components/ui/separator';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
+          import './App.css';
+          import { Button } from './components/ui/button';
+          import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
+          import { Badge } from './components/ui/badge';
+          import { Separator } from './components/ui/separator';
+          import { Input } from './components/ui/input';
+          import { Label } from './components/ui/label';
 
-import { 
-  MapPin, 
-  Clock, 
-  Calendar, 
-  Users, 
-  CreditCard, 
-  FileText, 
-  Phone, 
-  Mail,
-  Bus,
-  Camera,
-  Shield,
-  Heart,
-  CheckCircle,
-  ArrowRight,
-  User,
-  X,
-  Plus,
-  Minus,
-  UserPlus,
-  Utensils,
-  XCircle,      // <- Adicione este
-  AlertTriangle,
-  ClipboardCheck
-} from 'lucide-react';
-// Importando as imagens
-import interiorImage1 from './assets/happy1.jpg';
-import interiorImage2 from './assets/happy2.jpg';
-import jardimImage from './assets/happy3.jpg';
+          import { 
+            MapPin, 
+            Clock, 
+            Calendar, 
+            Users, 
+            CreditCard, 
+            FileText, 
+            Phone, 
+            Mail,
+            Bus,
+            Camera,
+            Shield,
+            Heart,
+            CheckCircle,
+            ArrowRight,
+            User,
+            X,
+            Plus,
+            Minus,
+            UserPlus,
+            Utensils,
+            XCircle,
+            AlertTriangle,
+            ClipboardCheck,
+            Trophy
+          } from 'lucide-react';
 
-function App() {
-  // Estados para o formulário
-  const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
-    studentName: '',
-    studentGrade: '',
-    studentClass: '',
-    parentName: '',
-    cpf: '',
-    email: '',
-    phone: '',
-    paymentMethod: 'pix',
-    installments: 1
-  });
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [inscriptionSuccess, setInscriptionSuccess] = useState(false);
+          // Importando as imagens
+          import interiorImage1 from './assets/happy1.jpg';
+          import interiorImage2 from './assets/happy2.jpg';
+          import jardimImage from './assets/happy3.jpg';
 
- // Estados para validação de CPF - REMOVA ESSAS LINHAS SE AINDA EXISTIREM
-              // const [cpfError, setCpfError] = useState('');
-              // const [cpfValid, setCpfValid] = useState(false);
+          function App() {
+            // Estados para o formulário
+            const [showForm, setShowForm] = useState(false);
+            const [formData, setFormData] = useState({
+              studentName: '',
+              studentGrade: '',
+              studentClass: ''
+            });
+            const [isProcessing, setIsProcessing] = useState(false);
 
-              // Função para scroll suave
-              const scrollToSection = (sectionId) => {
-                document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-              };
+            // Função para scroll suave
+            const scrollToSection = (sectionId) => {
+              document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+            };
 
-              // Função para mostrar formulário
-              const showInscricaoForm = () => {
-                setShowForm(true);
-                setTimeout(() => {
-                  document.getElementById('formulario-inscricao')?.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-              };
+            // Função para mostrar formulário
+            const showInscricaoForm = () => {
+              setShowForm(true);
+              setTimeout(() => {
+                document.getElementById('formulario-inscricao')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            };
 
-              // Função para capturar mudanças no formulário
-              const handleInputChange = (e) => {
-                const { name, value } = e.target;
-                setFormData(prev => ({ ...prev, [name]: value }));
-              };
+            // Função para capturar mudanças no formulário
+            const handleInputChange = (e) => {
+              const { name, value } = e.target;
+              setFormData(prev => ({ ...prev, [name]: value }));
+            };
 
-              // Função para enviar formulário
-              const handleSubmit = async (e) => {
-                e.preventDefault();
-                setIsProcessing(true);
+            // Função para enviar formulário
+            const handleSubmit = async (e) => {
+              e.preventDefault();
+              setIsProcessing(true);
 
-                try {  
-                  // Enviar dados para o webhook do n8n
-                  const response = await fetch('https://webhook.escolaamadeus.com/webhook/amadeuseventos', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      studentName: formData.studentName,
-                      studentGrade: formData.studentGrade,
-                      studentClass: formData.studentClass,
-                      timestamp: new Date().toISOString(),
-                      event: 'Amadeus-interclasse'
-                    })
-                  });
+              try {  
+                // Enviar dados para o webhook do n8n
+                const response = await fetch('https://webhook.escolaamadeus.com/webhook/amadeuseventos', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    studentName: formData.studentName,
+                    studentGrade: formData.studentGrade,
+                    studentClass: formData.studentClass,
+                    timestamp: new Date().toISOString(),
+                    event: 'Amadeus-interclasse'
+                  })
+                });
 
-                  if (response.ok) {
-                    const responseData = await response.json();
-                    console.log('Resposta do n8n:', responseData);
-                    
-                    if (responseData.success === false) {
-                      alert(responseData.message || 'Erro ao processar dados. Tente novamente.');
-                      return;
-                    }
-                    
-                    // Mostrar mensagem de sucesso
-                    alert('Inscrição realizada com sucesso!');
-                    
-                    // Limpar formulário
-                    setFormData({
-                      studentName: '',
-                      studentGrade: '',
-                      studentClass: ''
-                    });
-                    setShowForm(false);
-                    
-                  } else {
-                    const errorData = await response.json();
-                    alert(errorData.message || 'Erro ao enviar dados para o servidor');
+                if (response.ok) {
+                  const responseData = await response.json();
+                  console.log('Resposta do n8n:', responseData);
+                  
+                  if (responseData.success === false) {
+                    alert(responseData.message || 'Erro ao processar dados. Tente novamente.');
+                    return;
                   }
-                } catch (error) {
-                  console.error('Erro:', error);
-                  alert('Erro ao processar inscrição. Tente novamente.');
-                } finally {
-                  setIsProcessing(false);
+                  
+                  // Mostrar mensagem de sucesso
+                  alert('Inscrição realizada com sucesso!');
+                  
+                  // Limpar formulário
+                  setFormData({
+                    studentName: '',
+                    studentGrade: '',
+                    studentClass: ''
+                  });
+                  setShowForm(false);
+                  
+                } else {
+                  const errorData = await response.json();
+                  alert(errorData.message || 'Erro ao enviar dados para o servidor');
                 }
-              };
+              } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao processar inscrição. Tente novamente.');
+              } finally {
+                setIsProcessing(false);
+              }
+            };
 
-  // Função para mostrar formulário
-  const showInscricaoForm = () => {
-    setShowForm(true);
-    setTimeout(() => {
-      document.getElementById('formulario-inscricao')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
+            return (
+              <div className="min-h-screen smooth-scroll">
+                {/* Header/Navigation */}
+                <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b">
+                  <nav className="container mx-auto px-4 py-4">
+                    <div className="flex justify-between items-center">
+                      <h1 className="text-xl font-bold text-blue-900">Escola Amadeus</h1>
+                      <div className="hidden md:flex space-x-6">
+                        <button onClick={() => scrollToSection('sobre')} className="text-sm hover:text-primary transition-colors">Sobre</button>
+                        <button onClick={() => scrollToSection('itinerario')} className="text-sm hover:text-primary transition-colors">Informações</button>
+                        <button onClick={() => scrollToSection('documentacao')} className="text-sm hover:text-primary transition-colors">Observações</button>
+                        <button onClick={() => scrollToSection('custos')} className="text-sm hover:text-primary transition-colors">Inscrição</button>
+                        <button onClick={() => scrollToSection('contato')} className="text-sm hover:text-primary transition-colors">Contato</button>
+                      </div>
+                    </div>
+                  </nav>
+                </header>
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Validar formulário antes de enviar
-    if (!validateForm()) {
-      return;
-    }
-    
-    setIsProcessing(true);
-
-    try {  
-      // Enviar dados para o webhook do n8n
-      const response = await fetch('https://webhook.escolaamadeus.com/webhook/amadeuseventos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          studentName: formData.studentName,
-          studentGrade: formData.studentGrade,
-          studentClass: formData.studentClass,
-          parentName: formData.parentName,
-          cpf: formData.cpf,
-          email: formData.email,
-          phone: formData.phone,
-          paymentMethod: formData.paymentMethod,
-          installments: formData.installments,
-          amount: valorTotal,
-          timestamp: new Date().toISOString(),
-          event: 'Amadeus-interclasse'
-        })
-      });
-
-      if (response.ok) {
-          // Pegar a resposta do n8n PRIMEIRO
-          const responseData = await response.json();
-          console.log('Resposta do n8n:', responseData); // Para debug
-          
-          // Verificar se houve erro retornado pelo n8n
-          if (responseData.success === false) {
-            alert(responseData.message || 'Erro ao processar dados. Tente novamente.');
-            return;
-          }
-          
-          // Mostrar tela de sucesso
-        setInscriptionSuccess(true);
-  
-        // Redirecionar para o Asaas após 2 segundos
-        setTimeout(() => {
-          if (responseData.paymentUrl) {
-            window.location.href = responseData.paymentUrl;
-          } else {
-            console.log('Link de pagamento não encontrado na resposta');
-            alert('Erro: Link de pagamento não encontrado. Entre em contato conosco.');
-          }
-        }, 1000);
-      } else {
-        const errorData = await response.json();
-        alert(errorData.message || 'Erro ao enviar dados para o servidor');
-      }
-    } catch (error) {
-      console.error('Erro:', error);
-      alert('Erro ao processar inscrição. Tente novamente.');
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen smooth-scroll">
-      {/* Header/Navigation */}
-      <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b">
-        <nav className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold text-blue-900">Escola Amadeus</h1>
-            <div className="hidden md:flex space-x-6">
-              <button onClick={() => scrollToSection('sobre')} className="text-sm hover:text-primary transition-colors">Sobre</button>
-              <button onClick={() => scrollToSection('Programação do Evento')} className="text-sm hover:text-primary transition-colors">Programação do Evento</button>
-              <button onClick={() => scrollToSection('custos')} className="text-sm hover:text-primary transition-colors">Custos</button>
-              <button onClick={() => scrollToSection('Observação')} className="text-sm hover:text-primary transition-colors">Observação</button>
-              <button onClick={() => scrollToSection('orientacoes')} className="text-sm hover:text-primary transition-colors">Orientações</button>
-              <button onClick={() => scrollToSection('contato')} className="text-sm hover:text-primary transition-colors">Contato</button>
-            </div>
-          </div>
-        </nav>
-      </header>
-
-      {/* Hero Section */}
-      <section className="hero-section min-h-screen flex items-center justify-center text-white relative">
-        <div className="text-center z-10 max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Jogos Interclasses Amadeus 2025
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Começa os nossos jogos interclasses, que vença a melhor turma!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-primary px-8 py-3 bg-white text-primary"
-              onClick={() => scrollToSection("sobre")}
-            >
-              Saiba Mais
-            </Button>
-          </div>
-          <div className="mt-12 flex justify-center items-center space-x-8 text-sm">
-            <div className="flex items-center">
-              <Calendar className="h-5 w-5 mr-2" />
-              31 de Outubro de 2025 - pela manhã.
-            </div>
-            <div className="flex items-center">
-              <MapPin className="h-5 w-5 mr-2" />
-              Ginásio do Amarante
-            </div>
-          </div>
-        </div>
-      </section>
+                {/* Hero Section */}
+                <section className="hero-section min-h-screen flex items-center justify-center text-white relative">
+                  <div className="text-center z-10 max-w-4xl mx-auto px-4">
+                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+                      Jogos Interclasses Amadeus 2025
+                    </h1>
+                    <p className="text-xl md:text-2xl mb-8 opacity-90">
+                      Começa os nossos jogos interclasses, que vença a melhor turma!
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button 
+                        size="lg" 
+                        variant="outline" 
+                        className="border-white text-white hover:bg-white hover:text-primary px-8 py-3 bg-white text-primary"
+                        onClick={() => scrollToSection("itinerario")}
+                      >
+                        Saiba Mais
+                      </Button>
+                    </div>
+                    <div className="mt-12 flex justify-center items-center space-x-8 text-sm">
+                      <div className="flex items-center">
+                        <Calendar className="h-5 w-5 mr-2" />
+                        31 de Outubro de 2025 - pela manhã
+                      </div>
+                      <div className="flex items-center">
+                        <MapPin className="h-5 w-5 mr-2" />
+                        Ginásio do Amarante
+                      </div>
+                    </div>
+                  </div>
+                </section>
       
     {/* Itinerário */}
       <section id="itinerario" className="section-padding bg-muted/30">
@@ -584,6 +497,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
