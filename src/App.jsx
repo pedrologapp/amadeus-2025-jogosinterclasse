@@ -315,7 +315,7 @@ function App() {
           <div className="mt-12 flex justify-center items-center space-x-8 text-sm">
             <div className="flex items-center">
               <Calendar className="h-5 w-5 mr-2" />
-              31 de Outubro de 2025 - pela manhça.
+              31 de Outubro de 2025 - pela manhã.
             </div>
             <div className="flex items-center">
               <MapPin className="h-5 w-5 mr-2" />
@@ -421,7 +421,7 @@ function App() {
                 <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
                 <div>
                   <p className="text-sm">
-                  O transporte está incluso no pacote.  
+                  Prazo Final de Inscrição: 29 de outubro. 
                   </p>
                 </div>
               </div>
@@ -430,7 +430,7 @@ function App() {
                 <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
                 <div>
                   <p className="text-sm">
-                    O não comparecimento do aluno no dia do evento não acarretará em reembolso do valor pago. 
+                     O aluno deverá comparecer com a camisa da gincana ou a camisa na cor da sua equipe ( Roupa composta). Meninos: Calção para jogar e Meninas: Calça legging.
                   </p>
                 </div>
               </div>
@@ -438,164 +438,35 @@ function App() {
                 <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
                 <div>
                   <p className="text-sm">
-                   Almoço e lanche poderão ser comprados no park.
+                    Os alunos deverão ir diretamente para o Ginásio.
                   </p>
                 </div>
               </div>    
-          
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <p className="text-sm">
+                    É obrigatório trazer seu lanche e garrafa com água.
+                  </p>
+                </div>
+              </div>             
             </div>
           </div>
         </div>
       </section>
 
-				{/* Alimentação Opcional */}
-      <section id="alimentacao" className="section-padding bg-white">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Alimentação Opcional</h2>
-			  <p className="text-lg text-muted-foreground">
-              Esses são os valores do Veneza Park
-            </p>
-          </div>
-
-		     <Card className="bg-yellow-50 border-yellow-200">
-            <CardContent className="p-6">
-              <div className="flex items-start space-x-3 mb-4">
-                <Shield className="h-6 w-6 text-yellow-600 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold text-yellow-800 mb-2">Informações Importantes</h3>
-                  <div className="space-y-2 text-sm text-yellow-700">
-                    <p>• Os kits de alimentação são <strong>opcionais</strong> e devem ser pagos separadamente</p>
-                    <p>• O pagamento deverá ser feito <strong>diretamente na escola</strong></p>
-                    <p>• Prazo para pagamento: até <strong>3 dias úteis antes da visita</strong></p>
-                    <p>• Você pode escolher quantos kits desejar ou nenhum</p>
-                    <p>• Também é possível levar seus próprios lanches (conforme regras do parque)</p>
-                  </div>
-                </div>
-              </div>
-              <div className="text-center pt-4 border-t border-yellow-200">
-                <p className="text-sm font-medium text-yellow-800">
-                  Para contratar os kits de alimentação, procure a secretaria da escola após confirmar sua inscrição no passeio
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <Card className="card-hover border-orange-200">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-3 bg-orange-100 rounded-full w-fit">
-                  <Utensils className="h-8 w-8 text-orange-600" />
-                </div>
-                <CardTitle className="text-orange-800">Kit Almoço Grupo</CardTitle>
-                <CardDescription>Self service até 1kg</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <div className="text-2xl font-bold text-orange-600 mb-2">R$ 75,00</div>
-                <p className="text-sm text-muted-foreground mb-4">por pessoa</p>
-                <ul className="text-sm space-y-1 text-left">
-                  <li>• Self service (até 1kg)</li>
-                  <li>• Loja Veneza Sabores</li>
-                  <li>• 1 refrigerante em lata ou suco Del Valle</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="card-hover border-green-200">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-3 bg-green-100 rounded-full w-fit">
-                  <Utensils className="h-8 w-8 text-green-600" />
-                </div>
-                <CardTitle className="text-green-800">Kit Lanche 1</CardTitle>
-                <CardDescription>Opção completa</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <div className="text-2xl font-bold text-green-600 mb-2">R$ 15,00</div>
-                <p className="text-sm text-muted-foreground mb-4">por pessoa</p>
-                <ul className="text-sm space-y-1 text-left">
-                  <li>• Coxinha</li>
-                  <li>• Fatia de pizza mussarela</li>
-                  <li>• Espetinho de carne ou frango</li>
-                  <li>• 1 refrigerante em lata</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="card-hover border-blue-200">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-3 bg-blue-100 rounded-full w-fit">
-                  <Utensils className="h-8 w-8 text-blue-600" />
-                </div>
-                <CardTitle className="text-blue-800">Kit Lanche 2</CardTitle>
-                <CardDescription>Hambúrguer</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <div className="text-2xl font-bold text-blue-600 mb-2">R$ 20,00</div>
-                <p className="text-sm text-muted-foreground mb-4">por pessoa</p>
-                <ul className="text-sm space-y-1 text-left">
-                  <li>• Cheeseburguer</li>
-                  <li>• 1 refrigerante em lata</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-
-     
-        </div>
-      </section>
+		
 		
       {/* Custos e Pagamento */}
       <section id="custos" className="section-padding bg-white">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Inscrição e Taxa</h2>
+            <h2 className="text-4xl font-bold mb-4">Inscrição</h2>
             <p className="text-lg text-muted-foreground">
-              Valor único por Aluno - À vista ou em até 4x no cartão. 
+              Inscreva-se aqui!
             </p>
           </div>
 
-          <Card className="mb-8">
-            <CardHeader className="text-center">
-              <CardTitle className="text-3xl text-primary">R$ 280,00</CardTitle>
-              <CardDescription>por aluno</CardDescription>
-              {/* 
-              <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                <p className="text-sm text-blue-800">
-                  <UserPlus className="inline h-4 w-4 mr-1" />
-                  <strong>Acompanhantes adicionais:</strong> R$ 20,00 cada 
-                </p>
-              </div>
-             */}
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-semibold mb-3 text-accent">O que está incluído:</h4>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-accent mr-2" />
-                      Transporte ida e volta.
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-accent mr-2" />
-                      Entrada para o park.
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-3 text-destructive">Informações importantes:</h4>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-start">
-                      <Shield className="h-4 w-4 text-destructive mr-2 mt-0.5" />
-                      Pagamento obrigatório até 10 de Outubro de 2025;
-                    </li>
-                    <li className="flex items-start">
-                      <Shield className="h-4 w-4 text-destructive mr-2 mt-0.5" />
-                      O fardamento da escola não será usado nesse passeio, roupas apropriadas livre.
-                    </li>
-                  </ul>
-                </div>
-              </div>
               
               <Separator className="my-6" />
               
@@ -1031,6 +902,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
