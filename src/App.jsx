@@ -292,7 +292,7 @@ import React, { useState } from 'react';
                 <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
                 <div>
                   <p className="text-sm">
-                    É obrigatório trazer seu lanche e garrafa com água.
+                    É obrigatório trazer seu lanche e garrafa com água. Não haverá cantina para venda de lanches no local.
                   </p>
                 </div>
               </div>             
@@ -495,6 +495,7 @@ import React, { useState } from 'react';
 }
 
 export default App;
+
 
 
 
