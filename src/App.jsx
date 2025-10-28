@@ -224,6 +224,7 @@ import React, { useState } from 'react';
                 <ul className="text-sm list-disc list-inside space-y-1 text-left">
                   <li>Futsal (Masculino e Feminino)</li>
                   <li>Voleibol (Masculino e Feminino)</li>
+					<li>Queimada</li>
                 </ul>
               </CardContent>
             </Card>
@@ -503,6 +504,7 @@ import React, { useState } from 'react';
 }
 
 export default App;
+
 
 
 
